@@ -19,7 +19,7 @@ LocaleChangeInterceptor bean등록후 WebMvcConfigurer의 addInterceptors에 추
 주석처리된 부분을 주석제거하고 실행
 localhost:8080/message?locale=en_us
 
-# properties 설정
+#### properties 설정
 언어만으로 locale설정시 message_en.properties
 언어및국가 locale설정시 message_en_US.properties
 
