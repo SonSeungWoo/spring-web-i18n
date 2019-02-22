@@ -23,7 +23,8 @@ public class MessageSourceConfig implements WebMvcConfigurer {
      */
     @Bean
     public LocaleResolver localeResolver() {
-        return new AcceptLocaleResolver();
+        AcceptLocaleResolver acceptLocaleResolver = new AcceptLocaleResolver();
+        return acceptLocaleResolver;
     }
 
     /**

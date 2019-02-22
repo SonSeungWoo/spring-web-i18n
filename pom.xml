@@ -8,10 +8,12 @@
         <version>2.1.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>me.seungwoo</groupId>
     <artifactId>spring-web-i18n</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-web-i18n</name>
+    <packaging>war</packaging>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -42,6 +44,7 @@
     </dependencies>
 
     <build>
+        <finalName>test</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

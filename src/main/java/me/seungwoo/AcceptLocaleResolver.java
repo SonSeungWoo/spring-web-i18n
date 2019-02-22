@@ -16,10 +16,12 @@ public class AcceptLocaleResolver extends AcceptHeaderLocaleResolver {
 
     @Override
     public Locale resolveLocale(HttpServletRequest request) {
-        if (StringUtils.isBlank(request.getHeader("Accept-language"))) {
+        if (StringUtils.isBlank(request.getHeader("locale"))) {
             return Locale.getDefault();
         }
-        Locale locale = new Locale(request.getHeader("Accept-language"));
+        request.setAttribute("Accept-Language", request.getHeader("locale"));
+        Locale locale = new Locale(request.getHeader("locale"));
+        System.out.println(locale.getLanguage());
         return locale;
     }
 }
