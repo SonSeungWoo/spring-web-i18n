@@ -26,7 +26,6 @@ public class AcceptLocaleResolver extends AcceptHeaderLocaleResolver {
         String locale1 = request.getHeader("locale");
         String[] s = locale1.split("_");
         Locale locale = new Locale(s[0]);
-        logger.info("locale : {}", locale);
         return locale;
     }
 }
