@@ -2,12 +2,13 @@ package me.seungwoo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by Leo.
@@ -21,6 +22,10 @@ public class MainController {
 
     private final MessageByLocale messageSource;
 
+    private final MainService mainService;
+
+    private final CustomCollectionValidator customCollectionValidator;
+
     @GetMapping("/message")
     public ResponseEntity<String> message(HttpServletRequest request) {
         String message = messageSource.getMessage("label.msg", request);
@@ -29,6 +34,17 @@ public class MainController {
 
     @GetMapping("/user")
     public String user(@Valid @ModelAttribute UserDto userDto) {
+        return "success";
+    }
+
+    @PostMapping("/user")
+    public String userTest(@Valid @RequestBody List<UserDto> userDto, BindingResult bindingResult) throws BindException {
+        //mainService.testService(userDto);
+        // 이것만 추가 - List를 직접 validate
+        customCollectionValidator.validate(userDto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            throw new BindException(bindingResult);
+        }
         return "success";
     }
 

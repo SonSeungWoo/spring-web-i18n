@@ -15,6 +15,10 @@ public class ErrorResponse {
 
     private List<ErrorDetails> errors;
 
+    private ErrorDetails error;
+
+    private String msg;
+
     @Data
     public static class ErrorDetails {
         private String fieldName;
