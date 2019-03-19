@@ -17,6 +17,6 @@ import javax.validation.Valid;
 public class MainService {
 
     public void testService(@Valid UserDto userDto){
-        System.out.println("test2");
+        System.out.println("test");
     }
 }
