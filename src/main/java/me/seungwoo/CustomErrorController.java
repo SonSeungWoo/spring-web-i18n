@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.View;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -33,17 +34,17 @@ public class CustomErrorController implements ErrorController {
     public String test(HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         if (status.equals(HttpStatus.BAD_REQUEST.value())) {
-            return "redirect:" + PATH + "/400";
+            return "forward:" + PATH + "/400";
         }else if (status.equals(HttpStatus.FORBIDDEN.value())) {
-            return "redirect:" + PATH + "/403";
+            return "forward:" + PATH + "/403";
         }else if (status.equals(HttpStatus.NOT_FOUND.value())) {
-            return "redirect:" + PATH + "/404";
+            return "forward:" + PATH + "/404";
         }else if (status.equals(HttpStatus.METHOD_NOT_ALLOWED.value())) {
-            return "redirect:" + PATH + "/405";
+            return "forward:" + PATH + "/405";
         }else if (status.equals(HttpStatus.INTERNAL_SERVER_ERROR.value())) {
-            return "redirect:" + PATH + "/500";
+            return "forward:" + PATH + "/500";
         }else if (status.equals(HttpStatus.SERVICE_UNAVAILABLE.value())) {
-            return "redirect:" + PATH + "/503";
+            return "forward:" + PATH + "/503";
         }
         return "error";
     }
@@ -51,35 +52,47 @@ public class CustomErrorController implements ErrorController {
     @GetMapping(value = "/400")
     @ResponseBody
     public ResponseEntity<String> unauthorized(HttpServletRequest request) {
+        request.setAttribute(
+                View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
         return ResponseEntity.ok(message.getMessage("badRequest.error.msg", request));
     }
 
     @GetMapping(value = "/403")
     @ResponseBody
     public ResponseEntity<String> forbidden(HttpServletRequest request) {
+        request.setAttribute(
+                View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
         return ResponseEntity.ok(message.getMessage("forbidden.error.msg", request));
     }
 
     @GetMapping(value = "/404")
     @ResponseBody
     public ResponseEntity<String> notFoundError(HttpServletRequest request) {
+        request.setAttribute(
+                View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
         return ResponseEntity.ok(message.getMessage("not.found.error.mag", request));
     }
 
     @GetMapping(value = "/405")
     @ResponseBody
     public ResponseEntity<String> methodNotAllowed(HttpServletRequest request) {
+        request.setAttribute(
+                View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
         return ResponseEntity.ok(message.getMessage("method.not.allowed.err.msg", request));
     }
 
     @GetMapping(value = "/500")
     @ResponseBody
     public ResponseEntity<String> serverError(HttpServletRequest request) {
+        request.setAttribute(
+                View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
         return ResponseEntity.ok(message.getMessage("internal.server.error.msg", request));
     }
 
     @GetMapping(value = "/503")
     public ResponseEntity<String> serviceUnavailable(HttpServletRequest request) {
+        request.setAttribute(
+                View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
         return ResponseEntity.ok(message.getMessage("service.unavailable.error.msg", request));
     }
 
