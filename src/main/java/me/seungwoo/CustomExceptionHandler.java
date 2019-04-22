@@ -3,6 +3,7 @@ package me.seungwoo;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -56,4 +57,14 @@ public class CustomExceptionHandler {
         errorResponse.setError(error);
         return errorResponse;
     }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse supportedException(HttpRequestMethodNotSupportedException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        ErrorResponse.ErrorDetails errorDetails = new ErrorResponse.ErrorDetails("supportedException",ex.getMessage());
+        errorResponse.setError(errorDetails);
+        return errorResponse;
+    }
+
 }

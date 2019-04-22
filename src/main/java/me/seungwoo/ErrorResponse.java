@@ -1,6 +1,8 @@
 package me.seungwoo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class ErrorResponse {
     private String msg;
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class ErrorDetails {
         private String fieldName;
         private String message;
