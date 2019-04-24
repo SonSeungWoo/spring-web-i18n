@@ -52,8 +52,6 @@ public class CustomErrorController implements ErrorController {
     @GetMapping(value = "/400")
     @ResponseBody
     public ResponseEntity<String> unauthorized(HttpServletRequest request) {
-        request.setAttribute(
-                View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
         return ResponseEntity.ok(message.getMessage("badRequest.error.msg", request));
     }
 
